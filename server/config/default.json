@@ -1,0 +1,6 @@
+{
+    "jwtPrivateKey": "unsecureKey",
+    "db": "mongodb+srv://kaambul:kaambul123@cluster0.lodd8.mongodb.net/product?retryWrites=true&w=majority",
+    "port": "3900",
+    "requiresAuth": true
+}

@@ -1,0 +1,66 @@
+<div class="auth-wrapper">
+    <form class="form-signin" [formGroup]="updateProductForm" (ngSubmit)="updateproudct()">
+        <div class="col-sm-10 mb-4 text-center">
+            <h3>Update Product</h3>
+        </div>
+        <span class="text-danger" *ngIf="httperrors">
+      {{ httperrors }}
+    </span>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter name" />
+            <span class="text-danger" *ngIf="
+          (updateProductFormControls.name.touched || submitted) &&
+          updateProductFormControls.name.errors?.required
+        ">
+        Name is required
+      </span>
+            <span class="text-danger" *ngIf="
+          updateProductFormControls.name.touched &&
+          updateProductFormControls.name.errors?.minlength
+        ">
+        Name should have minimum 4 characters
+      </span>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" formControlName="description" placeholder="Description" />
+            <span class="text-danger" *ngIf="
+          (updateProductFormControls.description.touched || submitted) &&
+          updateProductFormControls.description.errors?.required
+        ">
+        description is required
+      </span>
+            <span class="text-danger" *ngIf="
+          updateProductFormControls.description.touched &&
+          updateProductFormControls.description.errors?.minlength
+        ">
+        description should have minimum 4 characters
+      </span>
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="text" class="form-control" formControlName="price" placeholder="Price" />
+        </div>
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="text" class="form-control" formControlName="quantity" placeholder="Quantity" />
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" [disabled]="!updateProductForm.valid" class="btn btn-block btn-primary">
+          update
+        </button>
+            </div>
+            <div class="col-4">
+                <button (click)="deleteProduct()" class="btn btn-small btn-danger">
+          Delete
+        </button>
+            </div>
+            <div class="col-4">
+                <a class="btn btn-outline-primary" routerLink="/product-list">Cancel</a>
+            </div>
+        </div>
+    </form>
+</div>

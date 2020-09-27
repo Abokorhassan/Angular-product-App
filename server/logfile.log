@@ -1,0 +1,7 @@
+{"level":"info","message":"Listening on port 3900...","timestamp":"2020-09-27T14:55:42.030Z"}
+{"level":"info","message":"Connected to mongodb+srv://kaambul:kaambul123@cluster0.lodd8.mongodb.net/product?retryWrites=true&w=majority...","timestamp":"2020-09-27T14:55:45.364Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2020-09-27T15:39:03.447Z"}
+{"level":"info","message":"Connected to mongodb+srv://kaambul:kaambul123@cluster0.lodd8.mongodb.net/product?retryWrites=true&w=majority...","timestamp":"2020-09-27T15:39:07.371Z"}
+{"message":"Cannot set headers after they are sent to the client","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at ServerResponse.setHeader (_http_outgoing.js:543:11)\n    at ServerResponse.header (/home/abokorhassan/Pictures/product-app-project/server/node_modules/express/lib/response.js:771:10)\n    at ServerResponse.send (/home/abokorhassan/Pictures/product-app-project/server/node_modules/express/lib/response.js:170:12)\n    at /home/abokorhassan/Pictures/product-app-project/server/routes/product.js:99:9\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)","code":"ERR_HTTP_HEADERS_SENT","level":"error","timestamp":"2020-09-27T15:39:16.740Z"}
+{"level":"info","message":"Listening on port 3900...","timestamp":"2020-09-27T15:41:44.366Z"}
+{"level":"info","message":"Connected to mongodb+srv://kaambul:kaambul123@cluster0.lodd8.mongodb.net/product?retryWrites=true&w=majority...","timestamp":"2020-09-27T15:41:51.241Z"}

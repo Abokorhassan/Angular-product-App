@@ -1,0 +1,45 @@
+<div class="auth-wrapper">
+    <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="registerUser()">
+        <span class="text-danger" *ngIf="httperrors"> {{ httperrors }} </span
+    ><span class="text-success" *ngIf="httpmsgs">
+      {{ httpmsgs }}
+    </span>
+        <h3 class="h3 mb-3 font-weight-normal text-center">Please sign up</h3>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Enter name" />
+            <span class="text-danger" *ngIf="
+          (signupFormControls.name.touched || submitted) &&
+          signupFormControls.name.errors?.required
+        ">
+        Name is required
+      </span>
+            <span class="text-danger" *ngIf="
+          signupFormControls.name.touched &&
+          signupFormControls.name.errors?.minlength
+        ">
+        Name should have minimum 4 characters
+      </span>
+        </div>
+        <div class="form-group">
+            <label>Email address</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="Enter email" />
+            <span class="text-danger" *ngIf="
+          (signupFormControls.email.touched || submitted) &&
+          signupFormControls.email.errors?.required
+        ">
+        Email is required
+      </span>
+            <span class="text-danger" *ngIf="
+          (signupFormControls.email.touched || submitted) &&
+          signupFormControls.email.errors?.email
+        ">
+        Email is invalid
+      </span>
+        </div>
+
+        <button type="submit" [disabled]="!signupForm.valid" class="btn btn-block btn-primary">
+      Sign up
+    </button>
+    </form>
+</div>

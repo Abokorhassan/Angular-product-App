@@ -1,0 +1,12 @@
+.tableContainer{
+	margin: 6rem 6rem;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
