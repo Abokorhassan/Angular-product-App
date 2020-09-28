@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-invite-user',
+  templateUrl: './invite-user.component.html',
+  styleUrls: ['./invite-user.component.css'],
 })
-export class RegisterComponent implements OnInit {
-  signupForm: FormGroup;
+export class InviteUserComponent implements OnInit {
+  inviteUserForm: FormGroup;
   submitted = false;
   httperrors = '';
   httpmsgs = '';
@@ -23,20 +22,23 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.signupForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(4)]],
+    this.inviteUserForm = this.fb.group({
       email: ['abokor@gmail.com', [Validators.required, Validators.email]],
     });
   }
 
-  get signupFormControls() {
-    return this.signupForm.controls;
+  get inviteUserFormControls() {
+    return this.inviteUserForm.controls;
   }
 
-  registerUser() {
+  InviteUser() {
+    let userID = this.authService.getUserID();
+    const dataForm = this.inviteUserForm.value;
+    dataForm['userID'] = userID;
     this.submitted = true;
-    if (this.signupForm.valid) {
-      this.authService.signUp(this.signupForm.value).subscribe(
+
+    if (this.inviteUserForm.valid) {
+      this.authService.inviteUser(this.inviteUserForm.value).subscribe(
         (res: any) => {
           this.httpmsgs = res;
         },

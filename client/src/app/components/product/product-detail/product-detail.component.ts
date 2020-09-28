@@ -36,7 +36,6 @@ export class ProductDetailComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(4)]],
       price: [''],
       quantity: [''],
-      // userID: [''],
     });
   }
 

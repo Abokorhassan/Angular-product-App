@@ -5,15 +5,11 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const {
     User,
-    validate
 } = require("../../models/user");
 const express = require("express");
+const Joi = require("joi");
 const router = express.Router();
 
-router.get("/me", auth, async(req, res) => {
-    const user = await User.findById(req.user._id).select("-password");
-    res.send(user);
-});
 
 router.post("/", async(req, res) => {
     const {
@@ -21,34 +17,21 @@ router.post("/", async(req, res) => {
     } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
-    let user = await User.findOne({
+    const inviter = await User.findById(req.body.userID)
+    if (!inviter) return res.status(400).send("You're not in our database!")
+
+    let invitedUser = await User.findOne({
         email: req.body.email,
     });
-    if (user) return res.status(400).send("User already registered.");
+    if (invitedUser) return res.status(400).send("User already registered.");
 
-    user = new User(_.pick(req.body, ["name", "email"]));
-    const password = crypto.randomBytes(3).toString("hex"); // Create hex random pasword
-    user.password = password
+    MailConfig(inviter, req);
 
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt);
-
-    MailConfig(req, password);
-
-    await user.save();
-
-    const inviterUser = await User.findById(req.body.InvitedUser)
-    if (inviterUser) {
-        inviterUser.points = 10
-    }
-    await inviterUser.save()
-
-
-
-    res.status(200).json("You successfully created... check your email and get your password from their!", );
+    res.status(200).json("You successfully Invited this user, we sent him an email telling him to sign up Product App", );
 });
 
-function MailConfig(req, password) {
+
+function MailConfig(inviter, req) {
     const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -62,10 +45,11 @@ function MailConfig(req, password) {
         // to: "abokorhassan@gmail.com",
         to: req.body.email,
 
-        subject: "Product App Email Verification",
-        text: "You are receiving this because you (or someone else) has signed up Product App for your your email.\n\n" +
-            `YOUR PASSWORD IS:  ${password}\n\n` +
-            "If you didn't sign up Prduct App, please ignore this email.\n",
+        subject: "Product App Invitation",
+        text: `You are receiving this because ${inviter.name} has Invted to sign up to our Product App.\n\n` +
+            `If you interested in our product app please click this link below:\n\n` +
+            `http://${req.headers.origin}/inviteUser-signup/${inviter._id}\n\n` +
+            "If you're not interested, please just ignore this email.\n",
     };
 
     transporter.sendMail(mailOptions, (err, response) => {
@@ -81,7 +65,17 @@ function MailConfig(req, password) {
 
 }
 
+function validate(req) {
+    const schema = {
+        email: Joi.string()
+            .min(5)
+            .max(255)
+            .required()
+            .email(),
+        userID: Joi.objectId().required(),
 
-
+    };
+    return Joi.validate(req, schema);
+}
 
 module.exports = router;

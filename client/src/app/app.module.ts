@@ -15,6 +15,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddProductComponent } from './components/product/add-product/add-product.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
+import { InviteUserComponent } from './components/invite-user/invite-user.component';
+import { InviteUserSignupComponent } from './components/invite-user-signup/invite-user-signup.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ProductDetailComponent } from './components/product/product-detail/prod
     ChangePasswordComponent,
     AddProductComponent,
     ProductDetailComponent,
+    InviteUserComponent,
+    InviteUserSignupComponent,
   ],
   imports: [
     BrowserModule,

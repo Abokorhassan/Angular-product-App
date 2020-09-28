@@ -42,12 +42,9 @@ export class AddProductComponent implements OnInit {
     if (this.addProductForm.valid) {
       this.productService.addProduct(this.addProductForm.value).subscribe(
         (res: any) => {
-          // this.signupForm.reset();
-          // this.httpmsgs = res;
           this.router.navigate(['product-list']);
         },
         (errors) => {
-          // this.signupForm.reset();
           if (errors.status === 400) {
             this.httperrors = errors.error;
           } else {

@@ -36,6 +36,16 @@ export class AuthService {
     return this.http.put(`${api}/${id}`, data);
   }
 
+  inviteUser(data) {
+    let api = `${this.endpoint}/inviteUser`;
+    return this.http.post<any>(api, data);
+  }
+
+  inviteUserSignup(data) {
+    let api = `${this.endpoint}/register`;
+    return this.http.post<any>(api, data);
+  }
+
   getToken() {
     return localStorage.getItem('access_token');
   }

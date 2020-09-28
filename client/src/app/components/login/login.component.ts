@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
           }
         },
         (errors) => {
-          // this.signinForm.reset();
           if (errors.status === 400) {
             this.httperrors = errors.error;
           } else {

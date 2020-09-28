@@ -90,12 +90,10 @@ router.get("/:id", validateObjectId, async(req, res) => {
 router.delete("/:id", [auth], async(req, res) => {
 
     const product = await Product.findByIdAndRemove(req.params.id);
-
     if (!product)
         return res.status(404).send("The product with the given ID was not found.");
 
     res.send(product);
-    res.send("ss")
 });
 
 

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { InviteUserSignupComponent } from './components/invite-user-signup/invite-user-signup.component';
+import { InviteUserComponent } from './components/invite-user/invite-user.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { AddProductComponent } from './components/product/add-product/add-product.component';
@@ -42,6 +44,15 @@ const routes: Routes = [
     path: 'product/:id',
     component: ProductDetailComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'invite-user',
+    component: InviteUserComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'inviteUser-signup/:id',
+    component: InviteUserSignupComponent,
   },
 ];
 
