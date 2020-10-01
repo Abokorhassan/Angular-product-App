@@ -13,8 +13,20 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class RegisterComponent implements OnInit {
   signupForm: FormGroup;
   submitted = false;
+
   httperrors = '';
   httpmsgs = '';
+
+  // google maps zoom level
+  zoom: number = 14;
+
+  // initial center position for the map
+  DefaultLatitude: number = 9.561634416772648;
+  DefaultLongitude: number = 44.063075575307266;
+
+  lat: number;
+  lng: number;
+  locationChosen = false;
 
   constructor(
     public fb: FormBuilder,
@@ -25,7 +37,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     this.signupForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['abokor@gmail.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
+      address: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
 
@@ -33,8 +46,18 @@ export class RegisterComponent implements OnInit {
     return this.signupForm.controls;
   }
 
+  onChoseLocation(event) {
+    this.lat = event.coords.lat;
+    this.lng = event.coords.lng;
+    this.locationChosen = true;
+  }
+
   registerUser() {
+    const dataForm = this.signupForm.value;
+    dataForm['lat'] = this.lat;
+    dataForm['lng'] = this.lng;
     this.submitted = true;
+
     if (this.signupForm.valid) {
       this.authService.signUp(this.signupForm.value).subscribe(
         (res: any) => {

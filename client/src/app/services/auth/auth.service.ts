@@ -19,16 +19,29 @@ export class AuthService {
 
   constructor(private http: HttpClient, public router: Router) {}
 
-  // Sign-up
   signUp(user: User): Observable<any> {
     let api = `${this.endpoint}/register`;
     return this.http.post<any>(api, user);
   }
 
-  // Sign-in
   signIn(user: User): Observable<any> {
     let api = `${this.endpoint}/auth`;
     return this.http.post<any>(api, user);
+  }
+
+  getUser(id) {
+    let api = `${this.endpoint}/me`;
+    return this.http.get<any>(`${api}/${id}`);
+  }
+
+  getUserLocations(id) {
+    let api = `${this.endpoint}/location`;
+    return this.http.get<any>(`${api}/${id}`);
+  }
+
+  addUserLocatin(location) {
+    let api = `${this.endpoint}/location`;
+    return this.http.post<any>(api, location);
   }
 
   changingPass(id, data) {

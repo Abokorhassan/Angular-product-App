@@ -26,7 +26,7 @@ export class InviteUserSignupComponent implements OnInit {
   ngOnInit() {
     this.inviteUserSignupForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['abokor@gmail.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 

@@ -4,6 +4,16 @@
         <a *ngIf="this.authService.isLoggedIn" class="p-2 text-dark" routerLinkActive="active" routerLink="/invite-user">Invite User</a
     >
 
+    <button
+      *ngIf="this.authService.isLoggedIn"
+      class="btn btn-outline-secondary"
+      type="button"
+      routerLink="/invite-user"
+      (click)="goToProfile()"
+    >
+      Profile
+    </button>
+
     <a
       *ngIf="!this.authService.isLoggedIn"
       class="p-2 text-dark"
@@ -15,7 +25,6 @@
   <a
     *ngIf="!this.authService.isLoggedIn"
     class="btn btn-outline-primary"
-    routerLinkActive="active"
     routerLinkActive="active"
     routerLink="/signup"
     >Sign up</a

@@ -11,7 +11,7 @@ const Joi = require("joi");
 const router = express.Router();
 
 
-router.post("/", async(req, res) => {
+router.post("/", async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -42,7 +42,6 @@ function MailConfig(inviter, req) {
 
     const mailOptions = {
         from: "kaambulkaambul@gmail.com",
-        // to: "abokorhassan@gmail.com",
         to: req.body.email,
 
         subject: "Product App Invitation",

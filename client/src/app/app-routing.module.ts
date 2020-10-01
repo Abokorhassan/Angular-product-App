@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AddProductComponent } from './components/product/add-product/add-product.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { ProductListComponent } from './components/product/product-list/product-list.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -43,6 +44,11 @@ const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile/:id',
+    component: UserProfileComponent,
     canActivate: [AuthGuard],
   },
   {

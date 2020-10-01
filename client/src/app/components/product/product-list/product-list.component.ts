@@ -51,7 +51,6 @@ export class ProductListComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       (errors) => {
-        console.log(errors);
       }
     );
   }

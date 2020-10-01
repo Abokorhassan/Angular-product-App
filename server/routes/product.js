@@ -1,6 +1,5 @@
 const validateObjectId = require("../middleware/validateObjectId");
 const auth = require("../middleware/auth");
-
 const {
     Product,
     validate

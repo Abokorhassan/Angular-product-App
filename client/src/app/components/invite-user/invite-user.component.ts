@@ -23,7 +23,7 @@ export class InviteUserComponent implements OnInit {
 
   ngOnInit() {
     this.inviteUserForm = this.fb.group({
-      email: ['abokor@gmail.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 

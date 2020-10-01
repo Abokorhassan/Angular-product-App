@@ -5,17 +5,16 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const {
     User,
-    validate
 } = require("../../models/user");
+const {
+    Location
+} = require("../../models/locaiton");
+const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
 
-router.get("/me", auth, async(req, res) => {
-    const user = await User.findById(req.user._id).select("-password");
-    res.send(user);
-});
 
-router.post("/", async(req, res) => {
+router.post("/", async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -27,6 +26,7 @@ router.post("/", async(req, res) => {
     if (user) return res.status(400).send("User already registered.");
 
     user = new User(_.pick(req.body, ["name", "email"]));
+
     const password = crypto.randomBytes(3).toString("hex"); // Create hex random pasword
     user.password = password
 
@@ -34,16 +34,30 @@ router.post("/", async(req, res) => {
     user.password = await bcrypt.hash(user.password, salt);
 
     MailConfig(req, password);
-
     await user.save();
+
+    // Saving the location
+    if (req.body.lat && req.body.lng) {
+        const location = new Location({
+            name: req.body.name,
+            lat: req.body.lat,
+            lng: req.body.lng,
+            primaryLocation: true,
+            user: {
+                _id: user._id,
+                name: user.name
+            }
+        })
+        await location.save()
+    }
+
+
 
     const inviterUser = await User.findById(req.body.InvitedUser)
     if (inviterUser) {
-        inviterUser.points = 10
+        inviterUser.points = inviterUser + 10
+        await inviterUser.save()
     }
-    await inviterUser.save()
-
-
 
     res.status(200).json("You successfully created... check your email and get your password from their!", );
 });
@@ -58,8 +72,7 @@ function MailConfig(req, password) {
     });
 
     const mailOptions = {
-        from: "kaambulkaambul@gmail.com",
-        // to: "abokorhassan@gmail.com",
+        from: "Product App",
         to: req.body.email,
 
         subject: "Product App Email Verification",
@@ -75,13 +88,23 @@ function MailConfig(req, password) {
         } else {
             console.log("here is the res: ", response);
             // res.status(200).json("recovery email sent");
-            // res.send("recovery email sent");
         }
     });
 
 }
 
 
+function validate(user) {
+    const schema = {
+        name: Joi.string().min(4).max(50).required(),
+        email: Joi.string().min(5).max(255).required().email(),
+        InvitedUser: Joi.objectId(),
+        lat: Joi.number(),
+        lng: Joi.number(),
+        address: Joi.string().min(4).max(50).required(),
+    };
+    return Joi.validate(user, schema);
+}
 
 
 module.exports = router;

@@ -90,13 +90,10 @@ export class ProductDetailComponent implements OnInit {
     const id = this.router.snapshot.paramMap.get('id');
     this.productService.deleteProduct(id).subscribe(
       (res) => {
-        console.log(res);
         this.route.navigate(['product-list']);
       },
 
-      (errors) => {
-        console.log(errors);
-      }
+      (errors) => {}
     );
   }
 }

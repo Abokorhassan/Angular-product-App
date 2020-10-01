@@ -1,0 +1,140 @@
+<div class="profile">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                src="https://picsum.photos/300/300"
+                class="rounded-circle"
+                width="150"
+              />
+              <div class="mt-3">
+                <h4>{{ userData.name }}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-3">
+          <form
+            class="form-signin"
+            [formGroup]="locationForm"
+            (ngSubmit)="addLocation()"
+          >
+            <div>
+              <span class="text-danger" *ngIf="httperrors">
+                {{ httperrors }} </span
+              ><span class="text-success" *ngIf="httpmsgs">
+                {{ httpmsgs }}
+              </span>
+            </div>
+            <div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  placeholder=" Enter Address name"
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    (locationFormControls.name.touched || submitted) &&
+                    locationFormControls.name.errors?.required
+                  "
+                >
+                  Address name is required
+                </span>
+                <span
+                  class="text-danger"
+                  *ngIf="
+                    locationFormControls.name.touched &&
+                    locationFormControls.name.errors?.minlength
+                  "
+                >
+                  Address name should have minimum 4 characters
+                </span>
+              </div>
+            </div>
+            <div>
+              <label>Choose Location</label>
+              <agm-map
+                [zoom]="zoom"
+                [disableDefaultUI]="false"
+                [zoomControl]="false"
+                [latitude]="DefaultLatitude"
+                [longitude]="DefaultLongitude"
+                (mapClick)="onChoseLocation($event)"
+              >
+                <agm-marker
+                  *ngIf="locationChosen"
+                  [latitude]="latForm"
+                  [longitude]="lngForm"
+                ></agm-marker>
+              </agm-map>
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="!locationForm.valid"
+              class="btn btn-block btn-primary mt-2"
+            >
+              Add Address
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ userData.name }}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ userData.email }}</div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Points</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">{{ userData.points }}</div>
+            </div>
+            <hr />
+          </div>
+        </div>
+        <div class="row gutters-sm">
+          <div class="col-sm mb-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <agm-map
+                  [zoom]="zoom"
+                  [disableDefaultUI]="false"
+                  [latitude]="DefaultLatitude"
+                  [longitude]="DefaultLongitude"
+                >
+                  <agm-marker
+                    *ngFor="let data of userLocations; let i = index"
+                    [latitude]="data.lat"
+                    [longitude]="data.lng"
+                  >
+                  </agm-marker>
+                </agm-map>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
