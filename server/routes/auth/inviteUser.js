@@ -33,10 +33,13 @@ router.post("/", async (req, res) => {
 
 function MailConfig(inviter, req) {
     const transporter = nodemailer.createTransport({
-        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
-            user: "kaambulkaambul@gmail.com",
-            pass: "kaambul123",
+            type: "OAuth2",
+            clientId: "485256091990-6i7o961pv72bpq997hcgls30ae9n3a8g.apps.googleusercontent.com",
+            clientSecret: "Q3qvh4VgppN2EOW53cnulb6O",
         },
     });
 
@@ -49,6 +52,11 @@ function MailConfig(inviter, req) {
             `If you interested in our product app please click this link below:\n\n` +
             `http://${req.headers.origin}/inviteUser-signup/${inviter._id}\n\n` +
             "If you're not interested, please just ignore this email.\n",
+        auth: {
+            user: "abokorhassan@gmail.com",
+            refreshToken: "1//04MjTDt--LM2uCgYIARAAGAQSNwF-L9IrryTr7hifmJ9V4k6L-QywjtVVyidosZSI_91aSq5JFf3nfJeGqXGTQYrck33GVxaOSHs",
+            accessToken: "ya29.a0AfH6SMBcPQbpNagdbHKR_hzGaFxS3g-03-w74UfRiCbhRnMn2DiIL3khYa_Ko8yUefNaqxacpxcU0VThKAOTYvaIbyRI58zADG1RaFq6Xgo-UTkPb9YMeJiWRdG61ekQQszu7cNhiHO7imAY4mLOh9tO77l44Gjh5w0",
+        },
     };
 
     transporter.sendMail(mailOptions, (err, response) => {
