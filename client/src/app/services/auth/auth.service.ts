@@ -9,53 +9,53 @@ import {
 import { Router } from '@angular/router';
 
 import { User } from 'src/app/models/user';
+import { appConfig } from 'src/app/shared/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'http://localhost:3900/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient, public router: Router) {}
 
   signUp(user: User): Observable<any> {
-    let api = `${this.endpoint}/register`;
+    let api = `${appConfig.URL}/register`;
     return this.http.post<any>(api, user);
   }
 
   signIn(user: User): Observable<any> {
-    let api = `${this.endpoint}/auth`;
+    let api = `${appConfig.URL}/auth`;
     return this.http.post<any>(api, user);
   }
 
   getUser(id) {
-    let api = `${this.endpoint}/me`;
+    let api = `${appConfig.URL}/me`;
     return this.http.get<any>(`${api}/${id}`);
   }
 
   getUserLocations(id) {
-    let api = `${this.endpoint}/location`;
+    let api = `${appConfig.URL}/location`;
     return this.http.get<any>(`${api}/${id}`);
   }
 
   addUserLocatin(location) {
-    let api = `${this.endpoint}/location`;
+    let api = `${appConfig.URL}/location`;
     return this.http.post<any>(api, location);
   }
 
   changingPass(id, data) {
-    let api = `${this.endpoint}/changePass`;
+    let api = `${appConfig.URL}/changePass`;
     return this.http.put(`${api}/${id}`, data);
   }
 
   inviteUser(data) {
-    let api = `${this.endpoint}/inviteUser`;
+    let api = `${appConfig.URL}/inviteUser`;
     return this.http.post<any>(api, data);
   }
 
   inviteUserSignup(data) {
-    let api = `${this.endpoint}/register`;
+    let api = `${appConfig.URL}/register`;
     return this.http.post<any>(api, data);
   }
 
@@ -83,7 +83,7 @@ export class AuthService {
 
   // User profile
   getUserProfile(id): Observable<any> {
-    let api = `${this.endpoint}/user-profile/${id}`;
+    let api = `${appConfig.URL}/user-profile/${id}`;
     return this.http.get(api, { headers: this.headers }).pipe(
       map((res: Response) => {
         return res || {};

@@ -2,20 +2,27 @@
   "name": "product-app",
   "version": "0.0.0",
   "scripts": {
+    "heroku-postbuild": "ng build --prod",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "engines": {
+    "node": "14.11.0",
+    "npm": "6.14.8"
   },
   "private": true,
   "dependencies": {
     "@agm/core": "^1.1.0",
     "@angular/animations": "~10.1.2",
     "@angular/cdk": "^10.2.2",
+    "@angular/cli": "~10.1.2",
     "@angular/common": "~10.1.2",
     "@angular/compiler": "~10.1.2",
+    "@angular/compiler-cli": "~10.1.2",
     "@angular/core": "~10.1.2",
     "@angular/forms": "~10.1.2",
     "@angular/material": "^10.2.2",
@@ -23,8 +30,11 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "bootstrap": "^4.5.2",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "typescript": "~4.0.2",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -9,12 +9,14 @@ import {
 import { Router } from '@angular/router';
 
 import { Product } from 'src/app/models/product';
+import { appConfig } from 'src/app/shared/config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  endpoint: string = 'http://localhost:3900/api/product';
+  endpoint: string = `${appConfig.URL}/product`;
+
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient, public router: Router) {}
