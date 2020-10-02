@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
 
     if (this.signupForm.valid) {
-      this.authService.signUp(this.signupForm.value).subscribe(
+      this.authService.signUp(dataForm).subscribe(
         (res: any) => {
           this.httpmsgs = res;
         },

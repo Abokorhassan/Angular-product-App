@@ -13,12 +13,12 @@ const {
 } = require("../models/user");
 const router = express.Router();
 
-router.get("/", [auth], async(req, res) => {
+router.get("/", [auth], async (req, res) => {
     const products = await Product.find().select("name description quantity price user");
     res.send(products);
 });
 
-router.post("/", [auth], async(req, res) => {
+router.post("/", [auth], async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -45,7 +45,7 @@ router.post("/", [auth], async(req, res) => {
     res.send(product);
 });
 
-router.put("/:id", [auth], async(req, res) => {
+router.put("/:id", [auth], async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -77,7 +77,7 @@ router.put("/:id", [auth], async(req, res) => {
     res.send(product);
 });
 
-router.get("/:id", validateObjectId, async(req, res) => {
+router.get("/:id", validateObjectId, async (req, res) => {
     const product = await Product.findById(req.params.id).select("-__v -user -_id");
     if (!product)
         return res.status(404).send("The product with the given ID was not found.");
@@ -86,7 +86,7 @@ router.get("/:id", validateObjectId, async(req, res) => {
 });
 
 
-router.delete("/:id", [auth], async(req, res) => {
+router.delete("/:id", [auth], async (req, res) => {
 
     const product = await Product.findByIdAndRemove(req.params.id);
     if (!product)

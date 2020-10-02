@@ -2,8 +2,17 @@
   max-height: 60rem;
 }
 
-agm-map {
-  height: 300px;
+/* agm-map {
+  height: 100px;
+} */
+
+.addMap {
+  height: 195px;
+
+}
+
+.largeMap {
+  height: 365px;
 }
 
 .main-body {
@@ -60,4 +69,8 @@ agm-map {
 
 .shadow-none {
   box-shadow: none !important;
+}
+
+mapContainer {
+  max-height: 30rem !important;
 }

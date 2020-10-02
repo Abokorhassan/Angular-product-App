@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
 
     const inviterUser = await User.findById(req.body.InvitedUser)
     if (inviterUser) {
-        inviterUser.points = inviterUser + 10
+        inviterUser.points = inviterUser.points + 10
         await inviterUser.save()
     }
 
@@ -101,7 +101,7 @@ function validate(user) {
         InvitedUser: Joi.objectId(),
         lat: Joi.number(),
         lng: Joi.number(),
-        address: Joi.string().min(4).max(50).required(),
+        address: Joi.string().min(4).max(50)
     };
     return Joi.validate(user, schema);
 }

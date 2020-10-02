@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-userSchema.methods.generateAuthToken = function() {
+userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({
             _id: this._id,
             name: this.name,
@@ -45,16 +45,5 @@ userSchema.methods.generateAuthToken = function() {
 
 const User = mongoose.model("User", userSchema);
 
-// function validateUser(user) {
-//     const schema = {
-//         name: Joi.string().min(2).max(50).required(),
-//         email: Joi.string().min(5).max(255).required().email(),
-//         InvitedUser: Joi.objectId() /// this is not part of the modal
-//     };
-
-//     return Joi.validate(user, schema);
-// }
-
 exports.userSchema = userSchema;
 exports.User = User;
-// exports.validate = validateUser;

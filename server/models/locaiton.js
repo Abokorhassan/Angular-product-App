@@ -24,7 +24,6 @@ const locationtSchema = new mongoose.Schema({
     },
     user: {
         type: userSchema,
-        // required: true,
     },
 });
 

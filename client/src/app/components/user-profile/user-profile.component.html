@@ -61,6 +61,7 @@
             <div>
               <label>Choose Location</label>
               <agm-map
+                class="addMap"
                 [zoom]="zoom"
                 [disableDefaultUI]="false"
                 [zoomControl]="false"
@@ -113,11 +114,12 @@
             <hr />
           </div>
         </div>
-        <div class="row gutters-sm">
+        <div class="row gutters-sm mapContainer">
           <div class="col-sm mb-3">
             <div class="card h-100">
               <div class="card-body">
                 <agm-map
+                  class="largeMap"
                   [zoom]="zoom"
                   [disableDefaultUI]="false"
                   [latitude]="DefaultLatitude"

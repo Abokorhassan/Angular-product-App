@@ -50,8 +50,7 @@ export class ProductListComponent implements OnInit {
         this.dataSource = res;
         this.dataSource.sort = this.sort;
       },
-      (errors) => {
-      }
+      (errors) => {}
     );
   }
 

@@ -1,0 +1,12 @@
+agm-map {
+  height: 10rem;
+  width: 28rem;
+}
+
+.auth-wrapper {
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  max-width: 30rem;
+}

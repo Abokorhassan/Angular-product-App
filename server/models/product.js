@@ -27,7 +27,6 @@ const productSchema = new mongoose.Schema({
     },
     user: {
         type: userSchema,
-        // required: true
     }
 });
 

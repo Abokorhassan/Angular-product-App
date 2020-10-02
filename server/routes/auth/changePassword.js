@@ -8,7 +8,7 @@ const express = require("express");
 const router = express.Router();
 
 
-router.put("/:id", async(req, res) => {
+router.put("/:id", async (req, res) => {
     const {
         error
     } = validate(req.body);
